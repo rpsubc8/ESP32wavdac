@@ -34,7 +34,7 @@ Play WAV RAW ESP32 direct DAC
 <br><br>
 <h1>gbConfig.h</h1>
 <ul>
- <li><b>use_lib_music_sample_8KHZ</b> 8 Khz play WAV</li>
- <li><b>use_lib_music_sample_16KHZ</b> 16 Khz play WAV</li>
- <li><b>use_lib_music_sample_32KHZ</b> 32 Khz play WAV</li>
+ <li><b>use_lib_music_sample_8KHZ:</b> 8 Khz play WAV</li>
+ <li><b>use_lib_music_sample_16KHZ:</b> 16 Khz play WAV</li>
+ <li><b>use_lib_music_sample_32KHZ:</b> 32 Khz play WAV</li>
 </ul>
