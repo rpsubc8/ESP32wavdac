@@ -1,6 +1,13 @@
 # ESP32wavdac
 Play WAV RAW ESP32 direct DAC
 
+<center><img src='preview/previewyoutube.gif'></center>
+<ul> 
+ <li><b>Youtube: </b><a href='https://www.youtube.com/watch?v=0mmr08lOI1s'>https://www.youtube.com/watch?v=0mmr08lOI1s</a></li>
+ <li><b>Forum: </b><a href='https://retrowiki.es/viewtopic.php?f=118&t=200039654#p200173634'>https://retrowiki.es/viewtopic.php?f=118&t=200039654#p200173634</a></li>
+</ul>
+
+
 <ul>
  <li>Direct DAC Sound (Not PWM, PDM, PPM or PAM)</li>
  <li>Play WAV in format RAW (8 bits unsigned)</li>
