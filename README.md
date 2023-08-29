@@ -18,8 +18,9 @@ Play WAV RAW ESP32 direct DAC
  <li>TTGO VGA32 v1.x</li>
  <li>Compatible ESP32 board (WEMOS D1 R32, Dev Kit V1, etc...)</li>
  <li>Not PSRAM</li>
- <li>Arduino IDE 1.8.11 Espressif System 1.0.6</li>
- <li>ArduinoDroid (6.3.1)</li>
+ <li>Arduino IDE 1.8.11 Espressif System 1.0.6 compatible</li>
+ <li>ArduinoDroid (6.3.1) compatible</li>
+ <li>Arduino Web Editor compatible</li>
  <li>Works with Visual Studio 1.66.1 PLATFORMIO 2.4.3 Espressif32 v3.5.0 (python 3.6) but project structure not included</li>
  <li>Test 16000 Hz Mono Sub Urban Cradles NCS Release</li>
  <li>ISR 8, 16 or 32 Khz</li>
