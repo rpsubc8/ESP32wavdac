@@ -18,7 +18,8 @@
 #include "gbConfig.h"
 #include <Arduino.h>
 #include <driver/dac.h>
-#include "soc/timer_group_struct.h"
+//#include "customDAC.h" //En futuro sera necesario para custom sin dac.h
+//#include "soc/timer_group_struct.h" //No se necesita
 #include "wavraw.h"
 
 //No necesita rtc_io.reg ni soc.h, compila PLATFORMIO,Arduino IDE y ArduinoDROID
@@ -33,6 +34,10 @@
 #define RTC_IO_PDAC2_DAC 0x000000FF
 #define RTC_IO_PDAC2_DAC_S 19
 
+
+#define SENS_SAR_DAC_CTRL2_REG (DR_REG_SENS_BASE + 0x009c)
+#define SENS_DAC_CW_EN1_M  (BIT(24))
+#define SENS_DAC_CW_EN2_M  (BIT(25))
 
 
 #ifdef use_lib_music_sample_44KHZ
@@ -88,8 +93,11 @@ hw_timer_t *gb_timerRellenoSonido = NULL;
 
 
 
+
 void IRAM_ATTR onTimerSoundDAC(void);
 void IRAM_ATTR GeneraRAW(void);
+
+
 
 
 //*********
@@ -104,13 +112,19 @@ void setup()
   memset(gb_dac_buf_r,0x80,sizeof(gb_dac_buf_r));
   memset(gb_dac_buf_l,0x80,sizeof(gb_dac_buf_l));
   dac_output_enable(DAC_CHANNEL_1);
-  dac_output_voltage(DAC_CHANNEL_1, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK
+  //dac_output_voltage(DAC_CHANNEL_1, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK    
+  CLEAR_PERI_REG_MASK(SENS_SAR_DAC_CTRL2_REG, SENS_DAC_CW_EN1_M);
+  SET_PERI_REG_BITS(RTC_IO_PAD_DAC1_REG, RTC_IO_PDAC1_DAC, 0x7f, RTC_IO_PDAC1_DAC_S);
   dac_output_enable(DAC_CHANNEL_2);
-  dac_output_voltage(DAC_CHANNEL_2, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK
- #else
+  //dac_output_voltage(DAC_CHANNEL_2, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK
+  CLEAR_PERI_REG_MASK(SENS_SAR_DAC_CTRL2_REG, SENS_DAC_CW_EN2_M);
+  SET_PERI_REG_BITS(RTC_IO_PAD_DAC2_REG, RTC_IO_PDAC2_DAC, 0x7f, RTC_IO_PDAC2_DAC_S);  
+ #else 
   memset(gb_dac_buf_r,0x80,sizeof(gb_dac_buf_r));
   dac_output_enable(DAC_CHANNEL_1);
-  dac_output_voltage(DAC_CHANNEL_1, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK
+  //dac_output_voltage(DAC_CHANNEL_1, 0x7f); //Evita llamar CLEAR_PERI_REG_MASK
+  CLEAR_PERI_REG_MASK(SENS_SAR_DAC_CTRL2_REG, SENS_DAC_CW_EN1_M);
+  SET_PERI_REG_BITS(RTC_IO_PAD_DAC1_REG, RTC_IO_PDAC1_DAC, 0x7f, RTC_IO_PDAC1_DAC_S);
  #endif 
  gb_timerSound= timerBegin(0, 80, true); 
  timerAttachInterrupt(gb_timerSound, &onTimerSoundDAC, true);
